@@ -6,7 +6,8 @@ import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => ({
     root:{
-        minHeight:'80vh'
+        minHeight:'80vh',
+        margin:'4vh 0'
     }
 }))
 
@@ -21,7 +22,7 @@ const BlogDetail = () => {
             {isPending && <Typography>loding....</Typography>}
             {error && <Typography>error from server</Typography>}
             {blog && <div className={classes.root}>
-                <Typography variant="h2">{blog.title}</Typography>
+                <Typography variant="h4">{blog.title}</Typography>
                 <Typography>{blog.body}</Typography>
             </div>}
         </Container>
