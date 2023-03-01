@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container';
+import useLogin from '../hooks/useLogin';
 import { TextField , Typography , makeStyles} from '@material-ui/core';
 
 const useStyle = makeStyles((theme) => ({
@@ -10,6 +11,7 @@ const useStyle = makeStyles((theme) => ({
 function LoginForm() {
   const [username, setUsername] = useState('')
   const [passwd, setPasswd] = useState('')
+  const [token, setToken] = useState('')
 
   const handlechange = (e) => {
     setUsername(e.target.value)
@@ -21,12 +23,14 @@ function LoginForm() {
 
   const handleclick = (e) => {
     e.preventDefault()
-    window.location.href = '/blogs';
+    console.log(token)
+    //window.location.href = '/blogs';
   }
 
   useEffect(() => {
-
-  });
+    const {newtoken, isPending, error} = useLogin('http://localhost:3001',username, passwd)
+    setToken(newtoken)
+  },[token]);
 
   const classes = useStyle()
 
