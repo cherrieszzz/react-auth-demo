@@ -6,7 +6,13 @@ const useFetch = (url) => {
     //const {error, isDepending, data} = useFetch('http://jsonplaceholder.typicode.com/posts')
 
     useEffect(() => {
-        fetch(url)
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token' : localStorage.getItem("token")
+              }
+        })
             .then(res => {
                 setIspending(true)
                 if(!res.ok) {

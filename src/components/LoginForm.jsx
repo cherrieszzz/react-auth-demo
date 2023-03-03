@@ -11,8 +11,8 @@ const useStyle = makeStyles((theme) => ({
 function LoginForm() {
   const [username, setUsername] = useState('')
   const [passwd, setPasswd] = useState('')
-  const [error, setError] = useState('')
   const [token, setToken] = useState('')
+  const [data, err, login] = useLogin()
 
   const handlechange = (e) => {
     setUsername(e.target.value)
@@ -24,42 +24,18 @@ function LoginForm() {
 
   const handleclick = (e) => {
     e.preventDefault()
-    // 发送登录请求
-     fetch('http://localhost:3001', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(
-        { 
-          username : username,
-          passwd : passwd 
-        }
-      ),
-    }).then(res => {
-      if(!res.ok) {
-        throw Error("Can not fetch data from the server")
-      }
-      return res.text()
-    }).then((data) => {
-      setToken(data)
-      console.log(data)
-    })
-    .catch((error) => {
-      console.log("my error" + error)
-    }) 
+    login('http://localhost:3001', username, passwd)
+    localStorage.setItem("token",data)
+    console.log(data)
+    if(!data) {
+      alert("no token")
+      return
+    }
 
-    // 检查auth值
-    localStorage.setItem("token",token)
-    
-    // if (decodedToken.auth !== 'admin') {
-    //   setError('您没有管理员访问权限');
-    //   return;
-    // }
-
+    window.location.href = '/admin'
     // 导航到管理员路由
     //history.push('/admin');
-    window.location.href = '/admin';
+    //window.location.href = '/admin';
   }
 
   const classes = useStyle()

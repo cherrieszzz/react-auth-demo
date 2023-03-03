@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const Admin = () => {
     const classes = useStyles()
 
-    const { data: users, isPending, error } = useFetch('http://jsonplaceholder.typicode.com/users')
+    const { data: users, isPending, error } = useFetch('http://localhost:3001/admin')
 
     return (
         <>
@@ -38,8 +38,8 @@ const Admin = () => {
                             <TableRow>
                                 <TableCell>ID</TableCell>
                                 <TableCell>用户名</TableCell>
-                                <TableCell>昵称</TableCell>
-                                <TableCell>邮箱</TableCell>
+                                <TableCell>密码</TableCell>
+                                <TableCell>身份</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -48,8 +48,8 @@ const Admin = () => {
                                     <TableRow key = {row.id}>
                                         <TableCell>{row.id}</TableCell>
                                         <TableCell>{row.username}</TableCell>
-                                        <TableCell>{row.name}</TableCell>
-                                        <TableCell>{row.email}</TableCell>
+                                        <TableCell>{row.passwd}</TableCell>
+                                        <TableCell>{row.auth}</TableCell>
                                     </TableRow>
                                 ))
                             }

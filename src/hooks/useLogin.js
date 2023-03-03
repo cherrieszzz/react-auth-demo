@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-const useLogin = (url, username, passwd) => {
+const useLogin = () => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(false)
 
-    function login() {
+    function login(url, username, passwd) {
         fetch(url, {
             method: 'POST',
             headers: {
